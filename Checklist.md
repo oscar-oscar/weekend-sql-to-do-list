@@ -11,17 +11,18 @@
 - [x] server setup in server.js
 - [x] test (localhost)
 - [x] client.js ready now
+- [x] test css link
 - [x] SQL for table (CREATE TABLE) 
 - [x] insert sample data
 
 ### READ
-- [] test GET route on server to return /dummy data (router optional STRETCH)
-- [] ready now functkon
+- [x] test GET route on server to return /dummy data (router optional STRETCH)
+- [x] ready now functkon
 - [] client side AJAX for GET
 - [] display data on the DOM
 
 ### CREATE
-- [] HTML FORM to collect data
+- [x] HTML FORM to collect data
 - [] values from an input on click
 - [] client side AJAX for POST 
 - [] server side POST route
