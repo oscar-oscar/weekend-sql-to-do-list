@@ -24,10 +24,11 @@
 ### CREATE
 - [x] HTML FORM to collect data
 - [x] values from an input on click
-- [] client side AJAX for POST 
-- [] server side POST route
-- [] INSERT INTO the database
-- [] Refresh data on success
+- [x] setup click listener for Add task
+- [x] client side AJAX for POST 
+- [x] server side POST route
+- [s] INSERT INTO the database
+- [s] Refresh data on success
 
 ### DELETE
 ...

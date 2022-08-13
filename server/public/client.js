@@ -6,7 +6,12 @@ function onReady() {
   //clickListeners();
   getTasks();
   sendTasks();
+  
 
+}
+function emptyInputs() {
+  $('input').val('');
+  $('select').val('');
 }
 //functin to get list of tasks
 function getTasks(){
@@ -56,7 +61,7 @@ function sendTasks(){
     console.log('ERROR in POST /tasks', error);
     alert('something went wrong in sendTasks');
   });
-
+  emptyInputs();
 }
 //setup click listeners 
 // function clickListeners(){
