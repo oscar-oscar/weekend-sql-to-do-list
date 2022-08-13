@@ -2,7 +2,8 @@ $(document).ready(onReady);
 
 function onReady() {
   console.log('in onReady');
-
+  $('#addButton').on('click', sendTasks);
+  //clickListeners();
   getTasks();
   sendTasks();
 
@@ -18,16 +19,16 @@ function getTasks(){
     console.log(response); // Resolve / succeed
     $('#viewTasks').empty();
     for(let i = 0; i < response.length; i++){
-      let task = response[i]
+      let tasks = response[i]
       $('#viewTasks').append(`
       <tr>
-        <td>${task.id}</td>
-        <td>${task.date_added}</td>
-        <td>${task.task_title}</td>
-        <td>${task.task_descript}</td>
-        <td>${task.priority}</td>
-        <td>${task.completed_task}</td>
-        <td>${task.notes}</td>
+        <td>${tasks.id}</td>
+        <td>${tasks.date_added}</td>
+        <td>${tasks.task_title}</td>
+        <td>${tasks.task_descript}</td>
+        <td>${tasks.priority}</td>
+        <td>${tasks.completed_task}</td>
+        <td>${tasks.notes}</td>
       </tr>
         `)
     }
@@ -36,8 +37,30 @@ function getTasks(){
     alert('something went wrong!');
   })
 }
-
+//ajax POST function to add tasks
 function sendTasks(){
   console.log('in sendTasks');
+  $.ajax({
+    type: 'POST',
+    url: '/tasks',
+    data:{
+      date_added: $('#dateIn').val(),
+      task_title: $('#taskAdd').val(),
+      task_descript: $('#taskDescription').val(),
+      priority: $('#priorityIn').val(),
+      notes: $('#noteIn').val(),
+    }
+  }).then(function (response) {
+    getTasks();
+  }).catch(function (error) {
+    console.log('ERROR in POST /tasks', error);
+    alert('something went wrong in sendTasks');
+  });
 
 }
+//setup click listeners 
+// function clickListeners(){
+//   $('#addButton').on('click', function(){
+//     console.log('in addButton on click');
+//   })
+// }
