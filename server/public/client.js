@@ -4,6 +4,7 @@ function onReady() {
   console.log('in onReady');
 
   getTasks();
+  sendTasks();
 
 }
 //functin to get list of tasks
@@ -25,7 +26,7 @@ function getTasks(){
         <td>${task.task_title}</td>
         <td>${task.task_descript}</td>
         <td>${task.priority}</td>
-        <td>${task.completed_at}</td>
+        <td>${task.completed_task}</td>
         <td>${task.notes}</td>
       </tr>
         `)
@@ -36,3 +37,7 @@ function getTasks(){
   })
 }
 
+function sendTasks(){
+  console.log('in sendTasks');
+
+}

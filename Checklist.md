@@ -23,7 +23,7 @@
 
 ### CREATE
 - [x] HTML FORM to collect data
-- [] values from an input on click
+- [x] values from an input on click
 - [] client side AJAX for POST 
 - [] server side POST route
 - [] INSERT INTO the database
