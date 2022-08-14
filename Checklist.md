@@ -18,8 +18,8 @@
 ### READ
 - [x] test GET route on server to return /dummy data (router optional STRETCH)
 - [x] ready now functkon
-- [] client side AJAX for GET
-- [] display data on the DOM
+- [x] client side AJAX for GET
+- [x] display data on the DOM
 
 ### CREATE
 - [x] HTML FORM to collect data
@@ -31,7 +31,10 @@
 - [s] Refresh data on success
 
 ### DELETE
-...
+- [x] server side delete route
+- [x] client side delete click handler
+- [x] client side delete ajax
 
 ### PUT
-...
+- [x] server side put route
+- [] client side AJAX to append complete button and toggle

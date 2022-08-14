@@ -4,6 +4,7 @@ function onReady() {
   console.log('in onReady');
   $('#addButton').on('click', sendTasks);
   $('body').on('click', '.delete-task', deleteTask);
+  $('body').on('click', '.update-task', updateStatus);
   //clickListeners();
   getTasks();
   sendTasks();
@@ -27,6 +28,8 @@ function getTasks(){
     // const date = new Date();
     for(let i = 0; i < response.length; i++){
       let tasks = response[i]
+      let statusButton = statusComplete(tasks)
+      console.log(statusButton);
       $('#viewTasks').append(`
       <tr>
         <td>${tasks.id}</td>
@@ -34,12 +37,17 @@ function getTasks(){
         <td>${tasks.task_title}</td>
         <td>${tasks.task_descript}</td>
         <td>${tasks.priority}</td>
-        <td>${tasks.status}</td>
         <td>${tasks.notes}</td>
-        <td>completedbutton</td>
+        <td>${tasks.status}</td>
+        <td>
+        <select name="statusIn" id="statusIn">
+        <option value="wip">WIP</option>
+        <option value="hold">On Hold</option>
+        <option value="completed">Completed</option>
+        </select></td>
         <td><button class="delete-task" data-id="${tasks.id}">Delete</button></td>
       </tr>
-        `)
+        `);
     }
   }).catch(function (error) { // Reject / failure
     console.log('ERROR in GET /tasks', error);
@@ -58,7 +66,7 @@ function sendTasks(){
       task_descript: $('#taskDescription').val(),
       priority: $('#priorityIn').val(),
       notes: $('#noteIn').val(),
-      status: $('#statusIn').val(),
+      status: '',
     }
   }).then(function (response) {
     getTasks();
@@ -74,6 +82,32 @@ function sendTasks(){
 //     console.log('in addButton on click');
 //   })
 // }
+function statusComplete(tasks){
+  console.log('in statusComplete');
+  if(tasks.status === "completed"){
+    return `<button class="update-task" data id="${tasks.id}">Completed</button>`
+  }else{
+    return ''
+  }
+}
+
+function updateStatus() {
+  const taskId = $(this).data('id');
+  $.ajax({
+    type: 'PUT',
+    url: `/tasks/${taskId}`,
+    data: {
+      status: 'completed'
+    }
+  }).then(function (response) {
+    getTasks();
+  }).catch(function (error) {
+    console.log(error);
+    alert('something went wrong');
+  })
+}
+
+
 
 function deleteTask(){
   console.log('in deleteTask');

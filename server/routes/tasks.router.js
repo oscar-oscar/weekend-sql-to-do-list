@@ -31,10 +31,28 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
         });
 });
+
+//PUT on server side UPDATE on postico
+router.put('/:id', (req, res) => {
+    const taskId = req.params.id;
+    console.log(req.body); // data from client
+    const queryText = `UPDATE "todo_list" 
+                       SET "status" = 'completed' 
+                       WHERE "id" = $1;`;
+    pool.query(queryText, [taskId]).then ((results) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('Error in PUT /:id', error);
+        res.sendStatus(500);
+    });
+});
+
+
 //DELETE
 router.delete('/:id', (req, res) => {
+    const taskId = req.params.id;
     const queryText = 'DELETE FROM "todo_list" WHERE "id" = $1;';//can test this in postico
-    pool.query(queryText, [req.params.id]).then((result ) => {
+    pool.query(queryText, [req.params.id]).then((result) => {
         res.send(200);// if deleted, success 
     }).catch((error) => {
         console.log('ERROR', error);
