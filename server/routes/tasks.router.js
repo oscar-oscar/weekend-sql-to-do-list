@@ -20,9 +20,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log('in POST router');
     const task = req.body;
-    const queryText = `INSERT INTO "todo_list" ("date_added", "task_title", "task_descript", "priority","completed_task", "notes")
+    const queryText = `INSERT INTO "todo_list" ("date_added", "task_title", "task_descript", "priority","notes","status")
                         VALUES ($1, $2, $3, $4, $5, $6);`;
-    pool.query(queryText, [task.date_added, task.task_title, task.task_descript, task.priority, task.completed_task, task.notes])
+    pool.query(queryText, [task.date_added, task.task_title, task.task_descript, task.priority, task.notes, task.status])
         .then((results) => {
             console.log(results);
             res.send(results);
@@ -31,6 +31,15 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
         });
 });
-
+//DELETE
+router.delete('/:id', (req, res) => {
+    const queryText = 'DELETE FROM "todo_list" WHERE "id" = $1;';//can test this in postico
+    pool.query(queryText, [req.params.id]).then((result ) => {
+        res.send(200);// if deleted, success 
+    }).catch((error) => {
+        console.log('ERROR', error);
+        res.sendStatus(500);
+    })
+})
 
 module.exports = router;

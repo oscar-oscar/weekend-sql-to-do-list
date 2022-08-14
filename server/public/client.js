@@ -3,6 +3,7 @@ $(document).ready(onReady);
 function onReady() {
   console.log('in onReady');
   $('#addButton').on('click', sendTasks);
+  $('body').on('click', '.delete-task', deleteTask);
   //clickListeners();
   getTasks();
   sendTasks();
@@ -23,6 +24,7 @@ function getTasks(){
   }).then(function (response) {
     console.log(response); // Resolve / succeed
     $('#viewTasks').empty();
+    // const date = new Date();
     for(let i = 0; i < response.length; i++){
       let tasks = response[i]
       $('#viewTasks').append(`
@@ -32,8 +34,10 @@ function getTasks(){
         <td>${tasks.task_title}</td>
         <td>${tasks.task_descript}</td>
         <td>${tasks.priority}</td>
-        <td>${tasks.completed_task}</td>
+        <td>${tasks.status}</td>
         <td>${tasks.notes}</td>
+        <td>completedbutton</td>
+        <td><button class="delete-task" data-id="${tasks.id}">Delete</button></td>
       </tr>
         `)
     }
@@ -54,6 +58,7 @@ function sendTasks(){
       task_descript: $('#taskDescription').val(),
       priority: $('#priorityIn').val(),
       notes: $('#noteIn').val(),
+      status: $('#statusIn').val(),
     }
   }).then(function (response) {
     getTasks();
@@ -69,3 +74,26 @@ function sendTasks(){
 //     console.log('in addButton on click');
 //   })
 // }
+
+function deleteTask(){
+  console.log('in deleteTask');
+  const taskId = $(this).data('id');
+  $.ajax({
+    type: 'DELETE',
+    //what are we deleteing?
+    url: `/tasks/${taskId}`
+  }).then(function (response) {
+    console.log(response);
+    getTasks();
+  }).catch(function (error) {
+    console.log(error);
+    alert('something went wrong in deleteTask');
+  });
+}
+
+
+
+
+
+
+
