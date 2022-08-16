@@ -6,7 +6,7 @@ const pool = require('../modules/pool.js');
 //GET
 router.get('/', (req, res) => {
     console.log('in GET /tasks');
-    const queryText = 'SELECT * FROM "todo_list";';
+    const queryText = 'SELECT * FROM "todo_list" ORDER BY "priority" DESC;';
     pool.query(queryText).then((result) => {
         console.log('SELECT SUCESSFUL', result);
         res.send(result.rows);

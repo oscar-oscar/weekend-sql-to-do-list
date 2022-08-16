@@ -5,10 +5,12 @@ function onReady() {
   $('#addButton').on('click', sendTasks);
   $('body').on('click', '.delete-task', deleteTask);
   $('body').on('click', '.update-task', updateStatus);
+  
+  
   //clickListeners();
   getTasks();
   sendTasks();
-  
+
 
 }
 function emptyInputs() {
@@ -16,7 +18,7 @@ function emptyInputs() {
   $('select').val('');
 }
 //functin to get list of tasks
-function getTasks(){
+function getTasks() {
   console.log('in getTasks');
   //ajax to call to server to get tasks list
   $.ajax({
@@ -26,10 +28,10 @@ function getTasks(){
     console.log(response); // Resolve / succeed
     $('#viewTasks').empty();
     // const date = new Date();
-    for(let i = 0; i < response.length; i++){
+    for (let i = 0; i < response.length; i++) {
       let tasks = response[i]
-      let statusButton = statusComplete(tasks)
-      console.log(statusButton);
+      // let statusButton = statusComplete(tasks)
+      // console.log(statusButton);
       $('#viewTasks').append(`
       <tr>
         <td>${tasks.id}</td>
@@ -39,12 +41,7 @@ function getTasks(){
         <td>${tasks.priority}</td>
         <td>${tasks.notes}</td>
         <td>${tasks.status}</td>
-        <td>
-        <select name="statusIn" id="statusIn">
-        <option value="wip">WIP</option>
-        <option value="hold">On Hold</option>
-        <option value="completed">Completed</option>
-        </select></td>
+        <td><button class="update-task" data-id="${tasks.id}">Complete</button></td>
         <td><button class="delete-task" data-id="${tasks.id}">Delete</button></td>
       </tr>
         `);
@@ -55,41 +52,45 @@ function getTasks(){
   })
 }
 //ajax POST function to add tasks
-function sendTasks(){
+function sendTasks() {
   console.log('in sendTasks');
   $.ajax({
     type: 'POST',
     url: '/tasks',
-    data:{
+    data: {
       date_added: $('#dateIn').val(),
       task_title: $('#taskAdd').val(),
       task_descript: $('#taskDescription').val(),
       priority: $('#priorityIn').val(),
       notes: $('#noteIn').val(),
-      status: '',
+      status: 'WIP',
     }
   }).then(function (response) {
     getTasks();
   }).catch(function (error) {
     console.log('ERROR in POST /tasks', error);
-    alert('something went wrong in sendTasks');
+    alert('ERROR. Double-check date input format');
   });
   emptyInputs();
 }
-//setup click listeners 
-// function clickListeners(){
-//   $('#addButton').on('click', function(){
-//     console.log('in addButton on click');
-//   })
-// }
-function statusComplete(tasks){
+
+function statusComplete() {
   console.log('in statusComplete');
-  if(tasks.status === "completed"){
-    return `<button class="update-task" data id="${tasks.id}">Completed</button>`
-  }else{
-    return ''
-  }
+  $(this).css('background', 'lightgreen');
 }
+
+
+
+// function statusColor(tasks){
+//   console.log('in statusColor');
+//   if(tasks.priority === 'high'){
+//     return `<button class="update-task" data id="${tasks.id}">Mark!</button>`
+//   }else{
+//     return 'x'
+//   }
+// }
+
+
 
 function updateStatus() {
   const taskId = $(this).data('id');
@@ -100,6 +101,7 @@ function updateStatus() {
       status: 'completed'
     }
   }).then(function (response) {
+    
     getTasks();
   }).catch(function (error) {
     console.log(error);
@@ -109,7 +111,7 @@ function updateStatus() {
 
 
 
-function deleteTask(){
+function deleteTask() {
   console.log('in deleteTask');
   const taskId = $(this).data('id');
   $.ajax({

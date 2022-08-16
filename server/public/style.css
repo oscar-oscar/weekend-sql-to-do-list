@@ -1,7 +1,84 @@
 html,
 body {
-    margin: 0;
-    padding: 0;
+    margin: 20px;
+    padding: 20px;
     font-family: 'Roboto', sans-serif;
     color:darkslategray;
+}
+
+header {
+    text-align: center;
+    background-color: beige;
+    color: lightblue;
+    padding: 50px;
+}
+
+h2{
+    color:grey;
+    font-family: 'Roboto', sans-serif;
+}
+
+input[type=text] {
+    width:max-content;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color:lightblue;
+    color: gray;
+    font-size: larger;
+  }
+
+  input[type=text]:focus {
+    background-color: bisque;
+    color:grey;
+    font-size: larger;
+  }
+
+  input{
+    display:flex;
+  }
+
+  .prioritySelect{
+    display:flex;
+    background-color: lightblue;
+    width: max-content;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: larger;
+    color: grey; 
+  }
+
+  button {
+    background-color: lightcoral;
+    border: none;
+    color: beige;
+    padding: 6px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    cursor:pointer;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: beige;
+}
+
+th {
+    background-color: lightblue;
+    color: white;
+    max-width: fit-content;
 }

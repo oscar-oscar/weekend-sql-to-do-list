@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TO-DO APP</title>
-    <script src="jquery.js"></script>
-    <script src="client.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TO-DO APP</title>
+  <script src="jquery.js"></script>
+  <script src="client.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
-        <h1>TO DO LIST</h1>
-    </header>
+  <header>
+    <h1>TO DO LIST</h1>
+  </header>
 
-    <section id="addTask">
-        <h2>New Task </h2>
-        <input type="text" id="dateIn" placeholder="Date added(mm-dd-yy)">
-        <input type="text" id="taskAdd" value="" placeholder="Task Title">
-        <input type="text" id="taskDescription" value="" placeholder="Task Description">
-        <label for="priorityIn"></label>
-        <select name="priorityIn" id="priorityIn">
-          <option value="">Choose Priority Level</option>
-          <option value="high">High</option>
-          <option value="med">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        <!-- <select name="statusIn" id="statusIn">
-            <option value="">WIP</option>
-            <option value="hold">On Hold</option>
-            <option value="wip">WIP</option>
-            <option value="completed">Completed</option>
-        </select> -->
+  <section id="addTask">
+    <h2>New Task </h2>
+    <label for="dateIn">Date</label>
+    <input type="text" id="dateIn" value="" placeholder="Date(dd/mm)">
+    <label for="taskAdd">Task Title</label>
+    <input type="text" id="taskAdd" value="" placeholder="Task Title">
+    <label for="taskDescription">Task Description</label>
+    <input type="text" id="taskDescription" value="" placeholder="Task Description">
+    <label for="priorityIn">Priority Level</label>
+    <select class="prioritySelect" name="priorityIn" id="priorityIn">
+      <option value="">Choose Priority Level</option>
+      <option value="3-High">High (3)</option>
+      <option value="2-Medium">Medium (2)</option>
+      <option value="1-Low">Low (1)</option>
+    </select>
+    <label for="noteIn">Note</label>
+    <input type="text" id="noteIn" value="" placeholder="Add Note">
 
-         <input type="text" id="noteIn" value="" placeholder="Add Note">
-         <button type="button" id="addButton">Add Task</button>
-    
+    <button type="button" id="addButton">Add Task</button>
+
     <div id="content-table">
-        <h2 class="h2-tasks">Task List</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Date Added</th>
-                  <th>Task Title</th>
-                  <th>Task Description</th>
-                  <th>Priority Level</th>
-                  <th>Note</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="viewTasks">
-              </tbody>
-            </table>
-         
+      <h2 class="h2-tasks">Task List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date Added</th>
+            <th>Task Title</th>
+            <th>Task Description</th>
+            <th>Priority Level</th>
+            <th>Note</th>
+            <th>Status</th>
+            <th>Update</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody id="viewTasks">
+        </tbody>
+      </table>
+
     </div>
 
 </body>
+
 </html>
