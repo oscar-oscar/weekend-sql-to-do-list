@@ -38,3 +38,10 @@
 ### PUT
 - [x] server side put route
 - [] client side AJAX to append complete button and toggle
+
+### styling
+- [] style h1 and body text
+- [] inputs styling
+- [] button styles
+- [] table styling
+- [] row styling

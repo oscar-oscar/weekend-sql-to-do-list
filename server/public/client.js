@@ -5,14 +5,10 @@ function onReady() {
   $('#addButton').on('click', sendTasks);
   $('body').on('click', '.delete-task', deleteTask);
   $('body').on('click', '.update-task', updateStatus);
-  
-  
-  //clickListeners();
   getTasks();
-  sendTasks();
-
 
 }
+
 function emptyInputs() {
   $('input').val('');
   $('select').val('');
@@ -29,9 +25,27 @@ function getTasks() {
     $('#viewTasks').empty();
     // const date = new Date();
     for (let i = 0; i < response.length; i++) {
-      let tasks = response[i]
+      let tasks = response[i];
       // let statusButton = statusComplete(tasks)
       // console.log(statusButton);
+
+      if (tasks.status === 'completed') {
+        //$('tr').css('color', 'red');
+        $('#viewTasks').append(`
+        <tr>
+          <td>${tasks.id}</td>
+          <td>${tasks.date_added}</td>
+          <td>${tasks.task_title}</td>
+          <td>${tasks.task_descript}</td>
+          <td>${tasks.priority}</td>
+          <td>${tasks.notes}</td>
+          <td>${tasks.status}</td>
+          <td></td>
+          <td><button class="delete-task" data-id="${tasks.id}">Delete</button></td>
+        </tr>
+          `);
+          
+    }else{
       $('#viewTasks').append(`
       <tr>
         <td>${tasks.id}</td>
@@ -41,11 +55,11 @@ function getTasks() {
         <td>${tasks.priority}</td>
         <td>${tasks.notes}</td>
         <td>${tasks.status}</td>
-        <td><button class="update-task" data-id="${tasks.id}">Complete</button></td>
+        <td><button class="update-task" data-id="${tasks.id}">Mark Complete</button></td>
         <td><button class="delete-task" data-id="${tasks.id}">Delete</button></td>
       </tr>
         `);
-    }
+    }}
   }).catch(function (error) { // Reject / failure
     console.log('ERROR in GET /tasks', error);
     alert('something went wrong!');
@@ -76,15 +90,46 @@ function sendTasks() {
 
 function statusComplete() {
   console.log('in statusComplete');
-  $(this).css('background', 'lightgreen');
+  if (tasks.status === 'completed') {
+    return true;
+} else {
+  return ''
 }
+
+
+  // $('.update-task').append(`
+  //   <li>
+
+  //   <span>this is ${color}..</span>
+  //   <button class="fridgen">Fridgen</button> 
+  //   <button class="deleteBtn">X</button>
+  //   ;
+
+  //   </li>`);
+  // if(tasks.status === 'completed'){
+  //   return  $( "p" ).click(function() {
+  //     $( this ).toggleClass( "highlight" );
+  //   });
+  //$('#update-task').css('border', '3px solid teal');
+
+
+}
+
+// $( "p" ).click(function() {
+//   $( this ).toggleClass( "highlight" );
+// });
+//$(this).css('background', 'lightgreen')
+// $( '.update-task' ).click(function() {
+//   $( this ).switchClass( "big", "blue", 1000, "easeInOutQuad" );
+// });
+
 
 
 
 // function statusColor(tasks){
 //   console.log('in statusColor');
-//   if(tasks.priority === 'high'){
-//     return `<button class="update-task" data id="${tasks.id}">Mark!</button>`
+//   if(tasks.status === 'coompleted'){
+//     return  $('#update-task').css('border', '3px solid teal');
 //   }else{
 //     return 'x'
 //   }
@@ -93,23 +138,23 @@ function statusComplete() {
 
 
 function updateStatus() {
+  // $(this).css('background-color', 'yellow');
   const taskId = $(this).data('id');
+  //can I run a variable through status like taskId in url?
   $.ajax({
     type: 'PUT',
     url: `/tasks/${taskId}`,
     data: {
-      status: 'completed'
+      status: 'completed',
     }
   }).then(function (response) {
-    
     getTasks();
+    //statusComplete();
   }).catch(function (error) {
     console.log(error);
     alert('something went wrong');
   })
 }
-
-
 
 function deleteTask() {
   console.log('in deleteTask');
