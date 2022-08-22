@@ -40,8 +40,8 @@
 - [] client side AJAX to append complete button and toggle
 
 ### styling
-- [] style h1 and body text
-- [] inputs styling
-- [] button styles
-- [] table styling
-- [] row styling
+- [x] style h1 and body text
+- [x] inputs styling
+- [x] button styles
+- [x] table styling
+- [x] row styling

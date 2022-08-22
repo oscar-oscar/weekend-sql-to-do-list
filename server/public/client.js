@@ -30,7 +30,8 @@ function getTasks() {
       // console.log(statusButton);
 
       if (tasks.status === 'completed') {
-        //$('tr').css('color', 'red');
+       // $('#viewTasks').css('color', 'green');
+       //can'figure out color change for row when task is marked complete
         $('#viewTasks').append(`
         <tr>
           <td>${tasks.id}</td>
